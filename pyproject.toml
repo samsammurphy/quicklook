@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quicklook"
-version = "0.1.0"
+version = "0.1.2"
 description = "An easy way to view numpy arrays"
 authors = ["Sam Murphy <samsammurphy@gmail.com>"]
 readme = "README.md"
@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.8"
 numpy = "^1.23.4"
 matplotlib = "^3.6.2"
+typer = "^0.7.0"
+rich = "^12.6.0"
 
 
 [tool.poetry.group.test.dependencies]
