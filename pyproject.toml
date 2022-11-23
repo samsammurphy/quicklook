@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quicklook"
-version = "0.1.2"
+version = "1.0.0"
 description = "An easy way to view numpy arrays"
 authors = ["Sam Murphy <samsammurphy@gmail.com>"]
 readme = "README.md"
