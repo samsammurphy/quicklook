@@ -79,21 +79,21 @@ def reshape_array(arr):
 
     if arr.ndim > 3:
         raise ValueError("Array needs to have 2 or 3 dimension")
-    
+
     # channel last ordering (matplotlib requirement)
     if arr.shape[-1] != min(arr.shape):
-        
+
         # assume smallest dimension is the channel index
         channel_index = int(np.where(arr.shape == np.min(arr.shape))[0])
-        
+
         # channel last ordering
         arr = np.moveaxis(arr, channel_index, -1)
-    
+
     # if there are more than 3 channels then pick first 3
     if min(arr.shape) > 3:
         arr = arr[:, :, 0:3]
 
-    # if there are 2 channels take their mean average 
+    # if there are 2 channels take their mean average
     if min(arr.shape) == 2:
         arr = np.mean(arr, axis=2)
 
@@ -127,7 +127,7 @@ def matplotlib_display(arr, figsize, title, cmap):
     plt.show()
 
 
-def show(arr: np.ndarray, clip = 0, title="", cmap="viridis", figsize=(5, 5)):
+def show(arr: np.ndarray, clip=0, title="", cmap="viridis", figsize=(5, 5)):
     """quick and easy way to visualize a numpy array"""
 
     if not isinstance(arr, (np.ndarray)):
