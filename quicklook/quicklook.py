@@ -145,12 +145,12 @@ def cli(filepath: str, title: str = "", clip: int = 0, cmap: str = "viridis"):
     Quicklook command line interface
 
     Args:
-      filepath (str): The file path of the image to look at
+        filepath (str): The file path of the image to look at
 
     Kwargs:
-      title (str): The title for the display window when looking at the image
-      clip (int): The percentile clip to remove from edges of pixel value distribution
-      cmap (str): Name of colormap to use for 2D arrays (ignored for arrays with more than 2 dimensions)
+        title (str): The title for the display window when looking at the image
+        clip (int): The percentile clip to remove from edges of pixel value distribution
+        cmap (str): Name of colormap to use for 2D arrays (ignored for arrays with more than 2 dimensions)
 
     """
 
