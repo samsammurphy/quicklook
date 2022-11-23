@@ -71,21 +71,31 @@ def bytescale(arr):
 def reshape_array(arr):
     """reshape arrays (if needed) for display"""
 
-    if len(arr.shape) == 1:
-        raise ValueError("Array needs to have more than 1 dimension")
+    if arr.ndim == 1:
+        raise ValueError("Array needs to have 2 or 3 dimension")
 
-    if len(arr.shape) == 2:
+    if arr.ndim == 2:
         return arr
 
+    if arr.ndim > 3:
+        raise ValueError("Array needs to have 2 or 3 dimension")
+    
     # channel last ordering (matplotlib requirement)
-    # BUG min might be second dimension
-    if arr.shape[0] == min(arr.shape):
-        arr = np.moveaxis(arr, 0, -1)
-
-    # first three wavebands
-    # TODO support for two channel array
+    if arr.shape[-1] != min(arr.shape):
+        
+        # assume smallest dimension is the channel index
+        channel_index = int(np.where(arr.shape == np.min(arr.shape))[0])
+        
+        # channel last ordering
+        arr = np.moveaxis(arr, channel_index, -1)
+    
+    # if there are more than 3 channels then pick first 3
     if min(arr.shape) > 3:
         arr = arr[:, :, 0:3]
+
+    # if there are 2 channels take their mean average 
+    if min(arr.shape) == 2:
+        arr = np.mean(arr, axis=2)
 
     # remove flat dimensions (matplotlib requirement)
     arr = np.squeeze(arr)
