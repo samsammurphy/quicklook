@@ -102,6 +102,30 @@ def reshape_array(arr):
 
     return arr
 
+def matplotlib_display(arr, figsize, title, cmap):
+    """display array in a window using matplotlib"""
+
+    plt.figure(figsize=figsize)
+    plt.imshow(arr, vmin=0, vmax=255, cmap=cmap)
+    plt.title(title)
+    plt.show()
+
+
+def show(arr: np.ndarray, clip=0, title="", cmap="viridis", figsize=(5, 5)):
+    """show numpy array"""
+
+    if not isinstance(arr, (np.ndarray)):
+        raise TypeError(f"Input must be a numpy array was given a {type(arr)}")
+
+    arr = replace_nan(arr)
+
+    arr = percentile_clip(arr, clip)
+
+    arr = bytescale(arr)
+
+    arr = reshape_array(arr)
+
+    matplotlib_display(arr, figsize, title, cmap)
 
 def static(width: int = 100, height: int = 100):
     """
@@ -117,32 +141,26 @@ def static(width: int = 100, height: int = 100):
 
     return np.random.rand(height, width)
 
+def pretty_array(size: int = 201):
+    """
+    an array that is pretty to look at
+    """
 
-def matplotlib_display(arr, figsize, title, cmap):
-    """display array in a window using matplotlib"""
+    if not (isinstance(size, int)):
+        raise TypeError("size must be integers")
 
-    plt.figure(figsize=figsize)
-    plt.imshow(arr, vmin=0, vmax=255, cmap=cmap)
-    plt.title(title)
-    plt.show()
+    coords = range(size)
 
+    # symmetrical X and Y values
+    X, Y = np.meshgrid(coords, coords)
+    X = X - np.floor(size/2)
+    Y = Y - np.floor(size/2)
 
-def show(arr: np.ndarray, clip=0, title="", cmap="viridis", figsize=(5, 5)):
-    """quick and easy way to visualize a numpy array"""
+    # creates a cool pattern
+    arr = np.sin(X**2 + Y**2)
+    arr = np.min(arr) - arr
 
-    if not isinstance(arr, (np.ndarray)):
-        raise TypeError(f"Input must be a numpy array was given a {type(arr)}")
-
-    arr = replace_nan(arr)
-
-    arr = percentile_clip(arr, clip)
-
-    arr = bytescale(arr)
-
-    arr = reshape_array(arr)
-
-    matplotlib_display(arr, figsize, title, cmap)
-
+    return arr
 
 def load(fpath: str) -> np.ndarray:
     """loads an image from file into a numpy array"""
