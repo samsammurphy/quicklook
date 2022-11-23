@@ -6,7 +6,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://github.com/samsammurphy/quicklook/about/</loc>
+         <loc>https://github.com/samsammurphy/quicklook/cli/</loc>
+         <lastmod>2022-11-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/samsammurphy/quicklook/getting_started/</loc>
+         <lastmod>2022-11-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://github.com/samsammurphy/quicklook/installation/</loc>
          <lastmod>2022-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
