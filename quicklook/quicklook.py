@@ -4,14 +4,24 @@ quicklook
 A simple way to visualize numpy arrays
 """
 
+# standard library
+import os
+from pathlib import Path
+from numbers import Number
+
+# 3rd party distribution packages
 import numpy as np
 from numpy import min, max
 import matplotlib.pyplot as plt
 from matplotlib import image
-from numbers import Number
 import typer
-import os
-from pathlib import Path
+
+# quicklook modules
+from example_arrays import static, easter_egg
+
+#
+#
+#
 
 
 def replace_nan(arr):
@@ -102,6 +112,7 @@ def reshape_array(arr):
 
     return arr
 
+
 def matplotlib_display(arr, figsize, title, cmap):
     """display array in a window using matplotlib"""
 
@@ -127,40 +138,6 @@ def show(arr: np.ndarray, clip=0, title="", cmap="viridis", figsize=(5, 5)):
 
     matplotlib_display(arr, figsize, title, cmap)
 
-def static(width: int = 100, height: int = 100):
-    """
-    a random 2D array
-
-    This function is called "static" because the output looks like
-    the white noise signal that televisions show(ed) when
-    there is no incoming broadcast signal
-    """
-
-    if not (isinstance(width, int) and isinstance(height, int)):
-        raise TypeError("width and heigh must be integers")
-
-    return np.random.rand(height, width)
-
-def pretty_array(size: int = 201):
-    """
-    an array that is pretty to look at
-    """
-
-    if not (isinstance(size, int)):
-        raise TypeError("size must be integers")
-
-    coords = range(size)
-
-    # symmetrical X and Y values
-    X, Y = np.meshgrid(coords, coords)
-    X = X - np.floor(size/2)
-    Y = Y - np.floor(size/2)
-
-    # creates a cool pattern
-    arr = np.sin(X**2 + Y**2)
-    arr = np.min(arr) - arr
-
-    return arr
 
 def load(fpath: str) -> np.ndarray:
     """loads an image from file into a numpy array"""
@@ -168,7 +145,7 @@ def load(fpath: str) -> np.ndarray:
     return image.imread(fpath)
 
 
-def cli(filepath: str, title: str = "", clip: int = 0, cmap: str = "viridis"):
+def cli(filepath: str = "", title: str = "", clip: int = 0, cmap: str = "viridis"):
     """
     Quicklook command line interface
 
@@ -182,16 +159,18 @@ def cli(filepath: str, title: str = "", clip: int = 0, cmap: str = "viridis"):
 
     """
 
-    # Primary purpose of this try block is to return a nice clean error message
-    # if the user gives an incorrect file path (somewhat likely eventually?)
-    try:
-        arr = load(filepath)
-    except:
-        print(f"Unable to load: {filepath}")
-        return
+    if not filepath:
+        print(
+            """
+      No filepath given, to load file from path:
 
-    if not title:
-        title = Path(filepath).stem
+      quicklook --filepath = path/to/file.png"""
+        )
+        arr = static()
+    else:
+        arr = load(filepath)
+        if not title:
+            title = Path(filepath).stem
 
     show(arr, clip=clip, title=title, cmap=cmap)
 
@@ -199,4 +178,7 @@ def cli(filepath: str, title: str = "", clip: int = 0, cmap: str = "viridis"):
 if __name__ == "__main__":
 
     # pretty command line interface using typer
-    typer.run(cli)
+    # typer.run(cli)
+
+    arr = easter_egg()
+    show(arr)
