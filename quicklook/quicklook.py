@@ -6,6 +6,7 @@ A simple way to visualize numpy arrays
 
 # standard library
 import os
+import sys
 from pathlib import Path
 from numbers import Number
 
@@ -16,7 +17,9 @@ import matplotlib.pyplot as plt
 from matplotlib import image
 import typer
 
-# quicklook modules
+# local modules
+here = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(here)
 from example_arrays import static
 
 #
@@ -174,7 +177,9 @@ def cli(filepath: str = "", title: str = "", clip: int = 0, cmap: str = "viridis
 
     show(arr, clip=clip, title=title, cmap=cmap)
 
-
-if __name__ == "__main__":
+def main():
     """pretty command line interface using typer"""
     typer.run(cli)
+
+if __name__ == "__main__":
+    main()
