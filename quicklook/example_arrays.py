@@ -60,10 +60,13 @@ def pretty_pattern(size: int = 201, XY: tuple = None) -> np.ndarray:
     # 3D array (3 channels)
     arr = np.stack([R, G, B], axis=2)
 
+    # min = 0
+    arr = arr - np.min(arr)
+
     return arr
 
 
-def egg(size: int = 201, XY: tuple = None) -> np.ndarray:
+def egg_array(size: int = 201, XY: tuple = None) -> np.ndarray:
     """
     an array that has an egg shape inside of it
 
@@ -104,9 +107,10 @@ def easter_egg(size: int = 201) -> np.ndarray:
     XY = distances_from_centre(size)
 
     pattern = pretty_pattern(size, XY=XY)
-    egg_mask = egg(size, XY=XY)
 
-    egg_mask = np.repeat(egg_mask[:, :, np.newaxis], 3, axis=2)
-    egg_mask * pattern
+    egg = egg_array(size, XY=XY)
+    egg = np.repeat(egg[:, :, np.newaxis], 3, axis=2)
 
-    return egg_mask * pattern
+    arr = egg * pattern
+
+    return arr
