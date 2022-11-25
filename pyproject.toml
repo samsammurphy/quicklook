@@ -2,8 +2,27 @@
 name = "quicklook"
 version = "1.0.0"
 description = "An easy way to view numpy arrays"
+license = "BSD-2-Clause"
 authors = ["Sam Murphy <samsammurphy@gmail.com>"]
 readme = "README.md"
+homepage = "https://samsammurphy.github.io/quicklook/"
+repository = "https://github.com/samsammurphy/quicklook"
+
+packages = [
+    { include = "example_arrays.py", from = "lib"}
+]
+
+# PyPI trove classifiers that describe the project
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Matplotlib",
+    "Framework :: Pytest",
+    "Programming Language :: Python",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
