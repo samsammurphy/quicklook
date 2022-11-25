@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "quicklook"
-version = "1.0.0"
+version = "1.1.0"
 description = "An easy way to view numpy arrays"
 license = "BSD-2-Clause"
 authors = ["Sam Murphy <samsammurphy@gmail.com>"]

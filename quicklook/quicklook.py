@@ -149,7 +149,7 @@ def load(fpath: str) -> np.ndarray:
     return image.imread(fpath)
 
 
-def cli(filepath: str = "", title: str = "", clip: int = 0, cmap: str = "viridis"):
+def cli(filepath: str =typer.Argument(''), title: str = "", clip: int = 0, cmap: str = "viridis"):
     """
     Quicklook command line interface
 
@@ -168,7 +168,7 @@ def cli(filepath: str = "", title: str = "", clip: int = 0, cmap: str = "viridis
             """
       No filepath given, to load file from path:
 
-      quicklook --filepath = path/to/file.png"""
+      quicklook path/to/file.png"""
         )
         arr = static()
     else:
