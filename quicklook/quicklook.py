@@ -17,12 +17,11 @@ from matplotlib import image
 import typer
 
 # quicklook modules
-from example_arrays import static, easter_egg
+from example_arrays import static
 
 #
 #
 #
-
 
 def replace_nan(arr):
     """replace array elements that are "not a number" with min valid number"""
@@ -63,14 +62,15 @@ def bytescale(arr):
     to be between 0 and 255 and have 8bits (i.e .a byte) of depth per channel.
     """
 
+    # all zeros
+    if not np.any(arr):
+        return arr
+
     # float dtype (temporarily) during scaling
     arr = arr.astype(float)
 
     # linear scale between 0 and 255
-    if min(arr) == max(arr):
-        arr = 255 * arr / np.max(arr)
-    else:
-        arr = 255 * ((arr - np.min(arr)) / (np.max(arr) - np.min(arr)))
+    arr = 255 * ((arr - np.min(arr)) / (np.max(arr) - np.min(arr)))
 
     # byte data type
     arr = np.uint8(arr)
@@ -176,9 +176,5 @@ def cli(filepath: str = "", title: str = "", clip: int = 0, cmap: str = "viridis
 
 
 if __name__ == "__main__":
-
-    # pretty command line interface using typer
-    # typer.run(cli)
-
-    arr = easter_egg()
-    show(arr)
+    """pretty command line interface using typer"""
+    typer.run(cli)
