@@ -26,6 +26,7 @@ from example_arrays import static
 #
 #
 
+
 def replace_nan(arr):
     """replace array elements that are "not a number" with min valid number"""
     return np.nan_to_num(arr, nan=np.nanmin(arr))
@@ -177,9 +178,11 @@ def cli(filepath: str = "", title: str = "", clip: int = 0, cmap: str = "viridis
 
     show(arr, clip=clip, title=title, cmap=cmap)
 
+
 def main():
     """pretty command line interface using typer"""
     typer.run(cli)
+
 
 if __name__ == "__main__":
     main()
